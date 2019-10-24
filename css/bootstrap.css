@@ -9,8 +9,14 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-body {
+body,a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  color: #606060 !important;
   margin: 0;
+}
+
+a:hover {
+  background: none !important;
 }
 
 #abstand{
