@@ -9,36 +9,25 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+header i{
+  margin-right: 10%;
+  margin-top: 5px;
+  padding: 0;
+}
+
 body,a {
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
   color: #606060 !important;
   margin: 0;
 }
 
+.text-input{
+  margin-top: 10px;
+}
+
 a:hover {
   background: none !important;
-}
-
-#abstand{
-  margin-top: 3%;
-  padding-bottom: 3%;
-  border-bottom: grey 1px solid;
-}
-
-#abstand2{
-  border-bottom: grey 1px solid;
-  padding-bottom: 3%;
-  margin-bottom: 3%;
-}
-
-#text-input{
-  display: block;
-  padding: 10px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.42857143;
-  color: #333;
-  white-space: nowrap;
 }
 
 article,
