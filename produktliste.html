@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Produktbeschreibung</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <img class="navbar-brand" src="./img/logo.png"/>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="produktliste.html">Produkte</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid text-center">    
+      <div class="row content">
+        <!-- Sidebar -->
+        <div class="wrapper">
+
+          <nav id="seitenav" class="col-sm-2 col-lg-2 components sidenav">
+          </nav>
+        </div>  
+        <!-- Produkt seite-->
+
+
+        <div id="produktabelle" class="col-md-5">
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="container-fluid">
+      <img class="float-left img-fluid" src="./img/logo.png"/>
+      &#169; 2019 JoRoSi
+      <ul class="list-group list-unstyled text-center list-inline">
+        <li >About</li>
+        <li>Kontakt</li>
+        <li>Impresum</li>
+        <li>BLa</li>
+        <li></li>
+      </ul>
+      </footer>
+  	<script>
+		$(document).ready(function() {
+			console.log("Versuche Titel zu laden");
+			console.log(window.location.search);
+			// extract product id from url
+			var para = new URLSearchParams(window.location.search)
+			console.log(para.get("id"));
+			prodid = para.get("id");
+
+			$.ajax ({
+				url : "http://localhost:8000/api/produktkategorie/alle",
+				method : "get",
+				dataType : "json"
+			}).done(function(response) {
+				console.log(response.daten);
+				// Alle Kategorien in seitenav eintragen
+				// ul Liste wird angelegt
+				var ul = $("<ul>");
+				// class property
+				ul.prop("class", "nav list-unstyled col-sm-2 padding");
+				ul.append('<li><a class="nav-link disabled text-dark" href="produktliste.hmtl" >Kategorien</a></li>');
+
+				for (i = 0; i < response.daten.length; i++) {
+					li = $("<li>");
+					a = $("<a>");
+					a.text(response.daten[i].bezeichnung);
+					a.prop("class", "nav-link active", "href",);
+					a.prop("href", "produktliste.html?id=" + response.daten[i].id); 
+					//<li><a class="nav-link active" href="produktliste.html" >kaljshdaaasdasd</a></li>
+					li.html(a);
+					ul.append(li);
+				}
+				$("#seitenav").html(ul);
+				console.log(window.location.search);
+				var para = new URLSearchParams(window.location.search)
+				console.log(para.get("id"));
+
+
+				
+				//$("#getprodukt").text(response.daten.bezeichnung);
+				console.log("hallo")
+			}).fail(function(jqXHR, statusText, error){
+				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
+				$("#beschreibung").html("ein Fehler ist aufgetretten");
+      });
+      
+
+      // Abfrage für liste an Produkten
+			$.ajax ({
+				url : "http://localhost:8000/api/produkt/alle",
+				method : "get",
+				dataType : "json"
+			}).done(function(response) {
+				console.log(response.daten);
+        console.log("hallo");
+        //<ul class="list-group list-unstyled m-3">
+            //<li><a class="nav-link active" href="produktseite.html" >Produkt x</a></li>
+        ul = $("<ul>");
+        ul.prop("class", "list-group list-unstyled m-3");
+        for (i = 0; i < response.daten.length; i++) {
+          li = $("<li>");
+          a = $("<a>");
+          a.prop({class : 'nav-link active'});
+          a.prop("href", "produktseite.html?id=" + response.daten[i].id);
+          a.text(response.daten[i].bezeichnung);
+          li.html(a);
+          ul.append(li);
+        }
+        $("#produktabelle").html(ul);
+
+			}).fail(function(jqXHR, statusText, error){
+				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
+				$("#beschreibung").html("ein Fehler ist aufgetretten");
+			});
+		});
+	</script>  
+  </body>
+</html>
