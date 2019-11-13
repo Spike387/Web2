@@ -10,20 +10,66 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
-header i{
-  margin-right: 10%;
-  margin-top: 5px;
-  padding: 0;
+#about-element{
+  margin-bottom: 15px;
 }
 
-body,a {
+.newsletter-input{
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+}
+
+.newsletter{
+  margin-top: 40px;
+}
+
+footer ul lh{
+  font-weight: 900;
+}
+
+footer ul a{
+  color: #696969;
+  cursor: pointer;  
+}
+
+#warenkorb_artikel_anzeige li{ /*Damit Produkte im dropdown Menü in der Mitte angezeigt werden und nicht links*/
+  text-align: center;
+}
+
+header nav img{
+  height: 80px;
+  width: 80px;
+}
+
+header nav li{
+  margin-top: 20px;
+}
+
+header i{
+  margin-right: 10%;
+  padding: 0;
+  color: #23527c;
+}
+
+body { /*Schrift im gesamten Body anwenden*/
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
   color: #606060 !important;
   margin: 0;
-}
-
-.text-input{
-  margin-top: 10px;
 }
 
 a:hover {
@@ -218,7 +264,7 @@ th {
   }
   a,
   a:visited {
-    text-decoration: underline;
+    text-decoration: none;
   }
   a[href]:after {
     content: " (" attr(href) ")";
@@ -1345,8 +1391,8 @@ mark,
 .text-lowercase {
   text-transform: lowercase;
 }
+text-transform: uppercase;
 .text-uppercase {
-  text-transform: uppercase;
 }
 .text-capitalize {
   text-transform: capitalize;
