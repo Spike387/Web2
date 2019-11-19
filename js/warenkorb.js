@@ -1,17 +1,16 @@
-function toWarenkorb(name,id,menge){
-    warenkorb_key = name;
-    warenkorb_value = "";
+function toWarenkorb(name,id,menge,preis){
+    var warenkorb_key = name;
+    var warenkorb_value = "";
     if (localStorage.getItem(warenkorb_key) == null){
-        warenkorb_value += id + ";" + menge;
+        warenkorb_value += id + ";" + menge + ";" + preis;
     }
     else{
         warenkorb_value = localStorage.getItem(warenkorb_key);
-        aufgeteilt = warenkorb_value.split(";");
-        warenkorb_id = aufgeteilt[0];
-        warenkorb_menge = parseInt(aufgeteilt[1]);
+        var aufgeteilt = warenkorb_value.split(";");
+        var warenkorb_id = aufgeteilt[0];
+        var warenkorb_menge = parseInt(aufgeteilt[1]);
         warenkorb_menge += parseInt(menge);
-        console.log("Folgendes wurde zum Warenkorb hinzugefügt: Key: " + warenkorb_key + " und Value: " + warenkorb_value);
-        warenkorb_value = warenkorb_id + ";" + warenkorb_menge.toString();
+        warenkorb_value = warenkorb_id + ";" + warenkorb_menge.toString() + ";" + aufgeteilt[2];
 
     }
     localStorage.setItem(warenkorb_key,warenkorb_value)
@@ -19,9 +18,10 @@ function toWarenkorb(name,id,menge){
 }
 
 function deleteFromWarenkorb(name, zuloeschen){
-    warenkorb_key = name;
-    warenkorb_menge = zuloeschen;
-    warenkorb_value = "";
+    var warenkorb_key = name;
+    var warenkorb_menge = zuloeschen;
+    var warenkorb_value = "";
+    var zielwert;
     if ( (warenkorb_value = localStorage.getItem(warenkorb_key)) != null){
         if (zuloeschen == 0){
             localStorage.removeItem(warenkorb_key);
