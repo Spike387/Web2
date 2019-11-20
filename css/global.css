@@ -9,3 +9,16 @@
 #abstand_contact{
     margin-top: 10px;
 }
+
+#warenkorb_anzeige_button a{
+    color: white !important;
+}
+
+#warenkorb_anzeige_button{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+#shopnow_button{
+    color:white;
+}

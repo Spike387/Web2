@@ -11,6 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/index.js"></script>
         <script src="js/warenkorb.js"></script>
     </head>
     
@@ -32,13 +33,18 @@
                             </li>
                             <li class="col col-lg-2 nav-item">
                                 <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Warenkorb <span class="caret"></span>
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="warenkorb_anzeige">Warenkorb <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu" id="warenkorb_artikel_anzeige">
-                                        <li class="dropdown-item">
-                                            <p>Keine Artikel
-                                                <br>im Warenkorb</p>
+                                    <ul class="dropdown-menu" id="warenkorb_anzeige">
+                                        <li class="dropdown-item text-center" id="warenkorb_anzeige_produkte">
+                                            <p>Ihr Warenkorb
+                                                <br>ist leer</p>
                                         </li>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-secondary btn-sm" id="warenkorb_anzeige_button">
+                                                <a href="./warenkorb.html">Warenkorb anzeigen</a>
+                                            </button>
+                                        </div>
                                     </ul>
                                 </div>
                             </li>
@@ -94,7 +100,7 @@
                         </div>
                     </div>
                     <div class="row h3 col col-lg-12 offset-lg-5 offset-md-5 offset-sm-5" id="abstand_newsletter">
-                        <button type="button" class="btn btn-secondary btn-lg">Shop now</button>
+                        <button type="button" class="btn btn-secondary btn-lg"><a href="produktliste.html" id="shopnow_button">Shop now</a></button>
                     </div>
                 </div>
             </header>

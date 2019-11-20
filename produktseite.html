@@ -43,50 +43,39 @@
 			</nav>
 		</div>
 	</header>
-	<div class="container-fluid text-center">    
-	<div class="row content">
+	<!-- Ende Header Anfang Seiten Content/Sidebar-->
+	<div class="row">
 		<!-- Sidebar -->
-		<div class="wrapper">
-
-		<nav id="seitenav" class="col-sm-2 col-lg-2 components sidenav">
-			<!-- ul table soll im skript generiert werden
-			<ul id="seitenav" class="nav list-unstyled col-sm-2 padding ">
-				<li><a class="nav-link disabled text-dark" href="" >Kategorien</a></li>
-				<li><a class="nav-link active" href="produktliste.html" >PenTesting</a></li>
-				<li><a class="nav-link active" href="produktliste.html" >kaljshdaaasdasd</a></li>
-
-			</ul> -->
-		</nav>
+		<div class="wrapper bg-light col-sm-4 col-lg-3">
+			<nav id="seitenav" class="components sidenav">
+			</nav>
 		</div>  
 		<!-- Produkt seite-->
-		<div class="col-sm-8 col-lg-8 text-left"> 
-			<h1 id="getprodukt">Produkbeschreibung</h1>
+		<div class="col-sm-8 col-lg-9"> 
+			<h1 id="getprodukt" class="text-left">Produkbeschreibung</h1>
 			<div class="row">
-				<div class="col-md-4">
-					<img src="./img/it-security_studenten.jpg"/>
-				</div>
-				
-				<div class="col-sm-3">
-					<p id="beschreibung"> hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung hier steht die Beschreibung </p>
+				<div class="container-fluid">
+					<img class="float-left w-30 p-2" src="./img/it-security_studenten.jpg"/>
+					<p id="beschreibung">
+						
+					</p>
 					<h3 class="text-success" id="preis">PREIS </h3>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-5">
-					
-				<ul class="list-unstyled">
-					<li>Weitere Infos</li>
-					<li>Weitere Infos</li>
-					<li>Weitere Infos</li>
-					<li>Weitere Infos</li>
-					<li>Weitere Infos</li>				
-				</ul>
+				<!-- weitere infos-->
+			<div class="row">
+				<p>Weitere Details ...</p>
+				<p>Weitere Details ...</p>
+				<p>Weitere Details ...</p>
 			</div>
 		</div>
-	</div>
+
 	</div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f13da016c4f4acb7c4d41b709744c3ff4fd34d05
 	<footer class="row card-footer">
 		<div class="col col-lg-1 offset-md-1"> <a href="http://instagram.com" target="blank"><img src="img/instagram.png"></a>
 		</div>
@@ -140,7 +129,7 @@
 			console.log(window.location.search);
 			// extract product id from url
 			var para = new URLSearchParams(window.location.search)
-			console.log("id " + para.get("id"));
+			console.log(para.get("id"));
 			prodid = para.get("id");
 
 			$.ajax ({
@@ -153,30 +142,28 @@
 				// ul Liste wird angelegt
 				var ul = $("<ul>");
 				// class property
-				ul.prop("class", "nav list-unstyled col-sm-2 padding");
-				ul.append('<li><a class="nav-link disabled text-dark" href="produktliste.html" >Kategorien</a></li>');
+				ul.prop("class", "nav list-unstyled col-sm-12 p-2");
+				ul.append('<li class="container-fluid text-center"><h4 class="p-3">Kategorien</h4></li>');
 
 				for (i = 0; i < response.daten.length; i++) {
 					li = $("<li>");
+          			li.prop("class","container-fluid m-2 p-2 bg-secondary");
 					a = $("<a>");
 					a.text(response.daten[i].bezeichnung);
-					a.prop("class", "nav-link active", "href");
+					a.prop("class", "nav-link active text-light");
 					a.prop("href", "produktliste.html?id=" + response.daten[i].id); 
-					//<li><a class="nav-link active" href="produktliste.html" >kaljshdaaasdasd</a></li>
 					li.html(a);
-					console.log(a);
 					ul.append(li);
 				}
 				$("#seitenav").html(ul);
 				console.log(window.location.search);
 				var para = new URLSearchParams(window.location.search)
 				console.log(para.get("id"));
-
-				console.log("hallo")
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
-			});
+      });
+  
 			$.ajax ({
 				url : "http://localhost:8000/api/produkt/gib/" + prodid,
 				method : "get",
@@ -184,7 +171,7 @@
 			}).done(function(response) {
 				console.log(response.daten);
 				$("#getprodukt").text(response.daten.bezeichnung);
-				$("#beschreibung").text(response.daten.beschreibung);
+				$("#beschreibung").html(response.daten.beschreibung);
 				$("#preis").append(response.daten.nettopreis + "&#8364;")
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
