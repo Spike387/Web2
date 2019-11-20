@@ -130,7 +130,14 @@
 
 				for (i = 0; i < response.daten.length; i++) {
 					li = $("<li>");
-          			li.prop("class","container-fluid m-2 p-2 bg-secondary");
+          if (prodid == response.daten[i].id)
+          {
+            li.prop("class","container-fluid m-2 p-2 bg-primary");
+          }
+          else 
+          {
+            li.prop("class","container-fluid m-2 p-2 bg-secondary");
+          }
 					a = $("<a>");
 					a.text(response.daten[i].bezeichnung);
 					a.prop("class", "nav-link active text-light");
@@ -161,14 +168,17 @@
         ul = $("<ul>");
         ul.prop("class", "list-group list-unstyled m-3");
         for (i = 0; i < response.daten.length; i++) {
-          li = $("<li>");
-          li.prop({class : ''});
-          a = $("<a>");
-          a.prop({class : 'nav-link active bg-warning'});
-          a.prop('href', "produktseite.html?id=" + response.daten[i].id);
-          a.text(response.daten[i].bezeichnung);
-          li.html(a);
-          ul.append(li);
+          if ((response.daten[i].kategorie.id == prodid) | (prodid == 0) ) 
+          {  
+            li = $("<li>");
+            li.prop({class : ''});
+            a = $("<a>");
+            a.prop({class : 'nav-link active bg-warning'});
+            a.prop('href', "produktseite.html?id=" + response.daten[i].id);
+            a.text(response.daten[i].bezeichnung);
+            li.html(a);
+            ul.append(li);
+          }
         }
         $("#produktabelle").html(ul);
 
