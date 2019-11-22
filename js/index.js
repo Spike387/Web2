@@ -75,7 +75,7 @@ $(document).on("click","#newsletter_anmeldung", function(event){
 function loadWarenkorb(){
     var produkte = []
     for (var key in localStorage){
-        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length"){
+        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
             produkte.push(key);
         }
     }
