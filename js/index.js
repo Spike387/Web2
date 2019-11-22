@@ -1,18 +1,75 @@
 $(document).ready(function(){
     loadWarenkorb();
     $("#1").click(function(){
-        toWarenkorb("Sicherheitsanalyse - Grob", "2", "1","429.99");
-        loadWarenkorb();
-        console.log("Es wurde eine Sicherheitsanalyse - Grob zum Warenkorb hinzugefügt und die Anzeige akutalisiert!");
-    })
+        $.ajax({
+            url: "http://localhost:8000/api/produkt/gib/" + this.id,
+            method: "get",
+            dataType: "json"
+        }).done(function(response){
+            toWarenkorb(response.daten.bezeichnung, response.daten.id, "1",response.daten.bruttopreis);
+            loadWarenkorb();
+            alert("Artikel erfolgreich zum Warenkorb hinzugefügt!");
+        })
+     })
 
     $("#2").click(function(){
-        toWarenkorb("Voluminöse Tasse", "1", "1","19.99");
-        loadWarenkorb();
-        console.log("Es wurde eine voluminöse Tasse zum Warenkorb hinzugefügt und die Anzeige akutalisiert!");
+        $.ajax({
+            url: "http://localhost:8000/api/produkt/gib/" + this.id,
+            method: "get",
+            dataType: "json"
+        }).done(function(response){
+            toWarenkorb(response.daten.bezeichnung, response.daten.id, "1",response.daten.bruttopreis);
+            loadWarenkorb();
+            alert("Artikel erfolgreich zum Warenkorb hinzugefügt!");
+        })
     })
+    $.ajax({
+        url: "http://localhost:8000/api/produkt/gib/1",
+        method: "get",
+        dataType: "json"
+    }).done(function (response) {
+        $("#produkt1_name").html(response.daten.bezeichnung);
+        $("#produkt1_text").html(response.daten.beschreibung);
+        $("#produkt1_preis").html(response.daten.bruttopreis + "€ inkl. MwSt.");
+    }).fail(function (jqXHR, statusText, error) {
+        console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
+    });
+
+    $.ajax({
+        url: "http://localhost:8000/api/produkt/gib/2",
+        method: "get",
+        dataType: "json"
+    }).done(function (response) {
+        $("#produkt2_name").html(response.daten.bezeichnung);
+        $("#produkt2_text").html(response.daten.beschreibung);
+        $("#produkt2_preis").html(response.daten.bruttopreis + "€ inkl. MwSt.");
+    }).fail(function (jqXHR, statusText, error) {
+        console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
+    });
 });
 
+$(document).on("click","#warenkorb_anzeige_remove", function(){
+    value = $(this).val();
+    deleteFromWarenkorb(value,0);
+    loadWarenkorb();
+})
+
+$(document).on("click","#newsletter_anmeldung", function(event){
+    event.preventDefault();
+    var newsletter_anmeldung = localStorage.getItem("Newsletter");
+    if (newsletter_anmeldung == "Ja"){
+        alert("Sie sind schon angemeldet!")
+    }else{
+        var inhalt = $("#newsletter_anmeldung_text").val();
+
+        if (inhalt == ""){
+            alert("Bitte geben Sie eine E-Mail Adresse an!");
+        }else{
+            localStorage.setItem("Newsletter","Ja");
+            alert("Sie haben sich erfolgreich für den Newsletter registriert!");
+        }  
+    }  
+})
 
 // Warenkorb Anzeige im Header
 function loadWarenkorb(){
@@ -32,9 +89,12 @@ function loadWarenkorb(){
             var preis = parseFloat(geteilt[2]) * parseFloat(menge);
             preis_gesamt += preis;
             preis = preis.toString();
-            content += menge + 'x ' + produkte[i] + '<br/>' + preis + '€' + '<hr class="hr">';
+            content += menge + 'x ' + produkte[i] + '<br/>' + preis + '€' + '<button type="button" class="close" id="warenkorb_anzeige_remove" aria-label="Close" value="'+ produkte[i] +'"><span aria-hidden="true">&times;</span></button>' + '<hr class="hr">';
         }
         content += 'Gesamt: ' + preis_gesamt + '€'; 
-        $("#warenkorb_anzeige_produkte").html(content);
+        
+    }else{
+        content += 'Ihr Warenkorb ist leer';
     }
+    $("#warenkorb_anzeige_produkte").html(content);
 }
