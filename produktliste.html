@@ -152,8 +152,8 @@
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
-      });
-      
+      }); 
+    
 
       // Abfrage für liste an Produkten
 			$.ajax ({

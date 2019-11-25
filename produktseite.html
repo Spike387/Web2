@@ -64,18 +64,19 @@
 			</div>
 				<!-- weitere infos-->
 			<div class="row">
-				<p>Weitere Details ...</p>
-				<p>Weitere Details ...</p>
-				<p>Weitere Details ...</p>
+				<div class="col-sm-7">
+					<p>Weitere Details ...</p>
+					<p>Weitere Details ...</p>
+					<p>Weitere Details ...</p>
+				</div>
+				<div class="col-sm-5">
+					<button class="btn-primary p-3 m-2" id="bestellen">in den Warenkorb</button>
+				</div>
 			</div>
 		</div>
 
 	</div>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f13da016c4f4acb7c4d41b709744c3ff4fd34d05
 	<footer class="row card-footer">
 		<div class="col col-lg-1 offset-md-1"> <a href="http://instagram.com" target="blank"><img src="img/instagram.png"></a>
 		</div>
@@ -130,7 +131,10 @@
 			// extract product id from url
 			var para = new URLSearchParams(window.location.search)
 			console.log(para.get("id"));
+			var prodid = 1;
 			prodid = para.get("id");
+			var prodpreis = 0;
+			var prodbez;
 
 			$.ajax ({
 				url : "http://localhost:8000/api/produktkategorie/alle",
@@ -147,7 +151,14 @@
 
 				for (i = 0; i < response.daten.length; i++) {
 					li = $("<li>");
-          			li.prop("class","container-fluid m-2 p-2 bg-secondary");
+					if (prodid == response.daten[i].id)
+          			{
+            			li.prop("class","container-fluid m-2 p-2 bg-primary");
+         			}
+          			else 
+          			{
+            			li.prop("class","container-fluid m-2 p-2 bg-secondary");
+          			}
 					a = $("<a>");
 					a.text(response.daten[i].bezeichnung);
 					a.prop("class", "nav-link active text-light");
@@ -162,20 +173,28 @@
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
-      });
+     		});
   
 			$.ajax ({
-				url : "http://localhost:8000/api/produkt/gib/" + prodid,
+				url : "http://localhost:8000/api/produkt/gib/" + prodid ,
 				method : "get",
 				dataType : "json"
 			}).done(function(response) {
-				console.log(response.daten);
-				$("#getprodukt").text(response.daten.bezeichnung);
+				console.log(response.daten.bezeichnung);
+				console.log(typeof(response.daten.bezeichnung));
+				console.log(prodbez);
+				prodbez = JSON.parse(JSON.stringify(response.daten));
+				$("#getprodukt").text(prodbez.bezeichnung);
 				$("#beschreibung").html(response.daten.beschreibung);
-				$("#preis").append(response.daten.nettopreis + "&#8364;")
+				prodpreis = response.daten.nettopreis;
+				$("#preis").append(prodpreis + "&#8364;")
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
+			});
+
+			$("#bestellen").click( function (){
+				toWarenkorb(prodbez.bezeichnung, prodid, '1', prodpreis);
 			});
 		});
 	</script>
