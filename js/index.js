@@ -1,3 +1,8 @@
+// Ohne Gesamt Aufruf funktionieren andere Aufrufe nicht!!! 
+$.ajax({
+    url: "http:localhost:8000/api/produkt/alle",
+    method: "get"
+})
 $(document).ready(function(){
     loadWarenkorb();
     $("#1").click(function(){
@@ -71,14 +76,19 @@ $(document).on("click","#newsletter_anmeldung", function(event){
     }  
 })
 
-// Warenkorb Anzeige im Header
-function loadWarenkorb(){
+function produkteImWarenkorb(){
     var produkte = []
     for (var key in localStorage){
         if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
             produkte.push(key);
         }
     }
+    return produkte
+}
+
+// Warenkorb Anzeige im Header
+function loadWarenkorb(){
+    produkte = produkteImWarenkorb();
     var content = '';
     var preis_gesamt = 0;
     if (produkte.length > 0){
