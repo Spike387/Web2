@@ -1,15 +1,31 @@
+$(document).ready(function(){
+    addItemToWK();
+});
+
+$(document).on("click","#remove_im_warenkorb", function(){
+    value = $(this).val();
+    deleteFromWarenkorb(value,0);
+    location.reload();
+
+})
+
 function addItemToWK() {
-    produkte = produkteImWarenkorb();
+    var produkte = []
+    for (var key in localStorage){
+        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
+            produkte.push(key);
+        }
+    }
 
-    for (var item in produkte) {
-
-        var warenkorb_value = localStorage.getItem(item);
+    console.log(produkte);
+    for (var i=0; i<produkte.length;i++) {
+        var warenkorb_value = localStorage.getItem(produkte[i]);
         var aufgeteilt = warenkorb_value.split(";");
 
         var id = aufgeteilt[0];
-        var menge = aufgeteilt[1];
+        var menge =     aufgeteilt[1];
         var preis = aufgeteilt[2];
-        var gesamtpreis = parseInt(menge) * parseInt(preis);
+        var gesamtpreis = parseFloat(menge) * parseFloat(preis);
 
         const div = document.createElement('div');
 
@@ -18,9 +34,9 @@ function addItemToWK() {
         div.innerHTML =`
             <li class="list-group-item">
                 <div class="warenkorb">
-                    <img class="produktbild" src="./img/test123.jpg" alt="W3Schools.com" width="85" height="85">
+                    <img class="produktbild" src="./img/Banner3.jpg" alt="Produktbild" width="85" height="85">
                     <div class="beschreibung">
-                        Produktname:
+                    ${produkte[i]}
                     <p font-size="1">
                         Dies ist eine kurze Beschreibung des Produkts, minimale Informationen
                     </p>
@@ -28,14 +44,14 @@ function addItemToWK() {
                 <div class="preis">
                     Preis:
                     <p>
-                        ${gesamtpreis}
+                        ${gesamtpreis}€
                     </p>
                 </div>
                 <div class="einzelpreis">
                     Produkt-
                     preis:
                     <p>
-                        ${preis}
+                        ${preis}€
                     </p>
                 </div>
                 <div class="menge">
@@ -44,11 +60,14 @@ function addItemToWK() {
                         <input class="mengeinput" type="text" name="" value="">
                      </p>
                 </div>
-                    <button type="button" class="btn btn-primary remove"><i class="fas fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-primary remove" value="${produkte[i]}" id="remove_im_warenkorb"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </li>
         `;
 
         document.getElementById('123').appendChild(div);
     }
+    const div = document.createElement('div');
+    div.className = 'row';
+    div.innerHTML = ``
 }   
