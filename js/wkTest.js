@@ -1,7 +1,7 @@
 function addItemToWK() {
     produkte = produkteImWarenkorb();
 
-    for each (var item in produkte) {
+    for (var item in produkte) {
 
         var warenkorb_value = localStorage.getItem(item);
         var aufgeteilt = warenkorb_value.split(";");
@@ -18,7 +18,7 @@ function addItemToWK() {
         div.innerHTML =`
             <li class="list-group-item">
                 <div class="warenkorb">
-                    <img class="produktbild" src="web2.jpg" alt="W3Schools.com" width="85" height="85">
+                    <img class="produktbild" src="./img/test123.jpg" alt="W3Schools.com" width="85" height="85">
                     <div class="beschreibung">
                         Produktname:
                     <p font-size="1">
