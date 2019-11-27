@@ -69,5 +69,18 @@ function addItemToWK() {
     }
     const div = document.createElement('div');
     div.className = 'row';
-    div.innerHTML = ``
+    div.innerHTML = `
+        <div class="zusammenfassung col offset-lg-9">
+            <div class"col col-lg-12">
+                Gesamtpreis:
+                <p>Mehrwertsteuer: </p>
+                <p>Preis: </p>
+            </div>
+            <div class="col col-lg-12">
+                <button class="btn btn-warning kaufen col col-lg-12" type="button">KAUFEN</button>
+            </div>
+        </div>
+        `;
+    
+    documet.getElementById('123').appendChild('div');
 }   
