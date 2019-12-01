@@ -1,4 +1,4 @@
-<script>
+
 		$(document).ready(function() {
 			console.log("Versuche Titel zu laden");
 			console.log(window.location.search);
@@ -79,4 +79,3 @@
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
 			});
 		});
-	</script>

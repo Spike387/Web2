@@ -1,4 +1,4 @@
-<script>
+
 		$(document).ready(function() {
 			console.log("Versuche Titel zu laden");
 			console.log(window.location.search);
@@ -71,4 +71,3 @@
 				toWarenkorb(prodbez.bezeichnung, prodid, '1', prodpreis);
 			});
 		});
-	</script>
