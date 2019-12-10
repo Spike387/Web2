@@ -67,7 +67,7 @@ function addItemToWK() {
 
         document.getElementById('123').appendChild(div);
     }
-    const div = document.createElement('div');
+    div = document.createElement('div');
     div.className = 'row';
     div.innerHTML = `
         <div class="zusammenfassung col offset-lg-9">
@@ -81,6 +81,5 @@ function addItemToWK() {
             </div>
         </div>
         `;
-    
-    document.getElementById('123').appendChild('div');
+    documet.getElementById('kaufen-button').appendChild(div);
 }   
