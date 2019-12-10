@@ -82,5 +82,5 @@ function addItemToWK() {
         </div>
         `;
     
-    documet.getElementById('123').appendChild('div');
+    document.getElementById('123').appendChild('div');
 }   
