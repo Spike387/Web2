@@ -12,6 +12,9 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/index.js"></script>
         <script src="js/warenkorb.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="./js/bestellung_abschicken.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/cssstyles.css">
     </head>
 <html>
   <body>
@@ -50,51 +53,55 @@
                         </ul>
                     </nav>
                 </div>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="cssstyles.css">
-<form class="zf">
-  <div class="form-row">
-    <div class="col-md-1 mb-3">
-      <label for="validationDefault01">Anrede</label>
-      <input type="text" class="form-control" id="validationDefault01"required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault01">Vorname</label>
-      <input type="text" class="form-control" id="validationDefault01"required>
-    </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault02">Nachname</label>
-      <input type="text" class="form-control" id="validationDefault02" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">E-Mail</label>
-      <input type="text" class="form-control" id="validationDefault01"required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">Straße/Nummer</label>
-      <input type="text" class="form-control" id="validationDefault01"required>
-    </div>
-    <div class="col-md-2 mb-3">
-      <label for="validationDefault02">PLZ</label>
-      <input type="text" class="form-control" id="validationDefault02" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">Stadt</label>
-      <input type="text" class="form-control" id="validationDefault01"required>
-    </div>
-  </div>
-  <button class="btn btn-primary" type="submit">Bestellen</button>
-</form>
-</article>
+            </header>
+            <form class="form_zusammenfassung offset-lg-4">
+                <div class="form-row">
+                    <div class="col-md-1 mb-3">
+                    <label for="Anrede">Anrede</label>
+                    <input type="text" class="form-control" id="Anrede"required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                    <label for="Vorname">Vorname</label>
+                    <input type="text" class="form-control" id="Vorname"required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <label for="Nachname">Nachname</label>
+                    <input type="text" class="form-control" id="Nachname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="E-Mail">E-Mail</label>
+                    <input type="text" class="form-control" id="E-Mail"required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="Straße">Straße/Nummer</label>
+                    <input type="text" class="form-control" id="Straße"required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                    <label for="PLZ">PLZ</label>
+                    <input type="text" class="form-control" id="PLZ" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="Stadt">Stadt</label>
+                    <input type="text" class="form-control" id="Stadt"required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="zahlungsart">Bitte zahlungsart wählen</label><br/>
+                        Rechnung <input type="radio" name="zahlungsart" id="zahlungsart" value="Rechnung" required/>
+                        Vorkasse <input type="radio" name="zahlungsart" id="zahlungsart" value="Vorkasse"/>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="button" id="bestellung_abschicken">Bestellen</button>
+            </form>
             <footer class="row card-footer">
                 <div class="col col-lg-1 offset-md-1">
                     <a href="http://instagram.com" target="blank">
@@ -163,4 +170,3 @@
         </div><!--ende container-->
     </body>
 </html>
-              
