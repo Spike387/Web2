@@ -68,6 +68,9 @@
 			});
 
 			$("#bestellen").click( function (){
+				console.log("erfolgreich zum Warenkorb hunzugefügt.");
 				toWarenkorb(prodbez.bezeichnung, prodid, '1', prodpreis);
+				loadWarenkorb();
+				alert("hinzugefügt");
 			});
 		});

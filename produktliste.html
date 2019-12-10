@@ -7,42 +7,49 @@
   <link rel="stylesheet" href="./css/bootstrap-theme.css"/>
   <link rel="stylesheet" href="./css/bootstrap-theme.min.css"/>
   <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico"/>
+  <link rel="stylesheet" href="./css/global.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/warenkorb.js"></script>
   <script src="js/produktliste.js"></script>
+  <script src="js/index.js"></script>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="row">
-        <nav class="navbar navbar-light bg-light navbar-expand-md col col-lg-12">
-            <div class="col col-lg-1 offset-lg-1">
-                <img src="img/logo.png" class="img-fluid" site="">
-            </div>
-            <div id="output"></div>
-            <ul class="nav col offset-lg-1">
-                <li class="col col-lg-2 offset-lg-3 nav-item"><a href="#" class="nav-link">Home</a>
-                </li>
-                <li class="col col-lg-2 nav-item"><a href="./contact.html" class="nav-link">Kontakt</a>
-                </li>
-                <li class="col col-lg-2 nav-item"><a href="./produktliste.html" class="nav-link">Shop</a>
-                </li>
-                <li class="col col-lg-2 nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Warenkorb <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" id="warenkorb_artikel_anzeige">
-                            <li class="dropdown-item">
-                                <p>Keine Artikel
-                                    <br>im Warenkorb</p>
+            <header>
+                <div class="row">
+                    <nav class="navbar navbar-light bg-light navbar-expand-md col col-lg-12">
+                        <div class="col col-lg-1 offset-lg-1">
+                            <img src="img/logo.png" class="img-fluid" site="">
+                        </div>
+                        <ul class="nav col offset-lg-1">
+                            <li class="col col-lg-2 offset-lg-3 nav-item">
+                                <a href="#" class="nav-link">Home</a>
                             </li>
+                            <li class="col col-lg-2 nav-item">
+                                <a href="./contact.html" class="nav-link">Kontakt</a>
+                            </li>
+                            <li class="col col-lg-2 nav-item">
+                                <a href="./produktliste.html" class="nav-link">Shop</a>
+                            </li>
+                            <li class="col col-lg-2 nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="warenkorb_anzeige">Warenkorb <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="warenkorb_anzeige">
+                                <li class="dropdown-item text-center" id="warenkorb_anzeige_produkte">
+                                    <p>Ihr Warenkorb
+                                    <br>ist leer</p>
+                                </li>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-secondary btn-sm" id="warenkorb_anzeige_button">
+                                       <a href="./warenkorb.html">Warenkorb anzeigen</a>
+                                    </button>
+                                </div>
+                            </ul>
                         </ul>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                    </nav>
+                </div>
     </header>
 
 	<!-- Ende Header Anfang Seiten Content/Sidebar-->
