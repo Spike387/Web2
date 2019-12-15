@@ -59,6 +59,8 @@
 				console.log(prodbez);
 				prodbez = JSON.parse(JSON.stringify(response.daten));
 				$("#getprodukt").text(prodbez.bezeichnung);
+				$("#prod_bild").prop({src: response.daten.bilder[0].bildpfad, style:"height:180px"});
+				console.log(response.daten.bilder[0].bildpfad);
 				$("#beschreibung").html(response.daten.beschreibung);
 				prodpreis = response.daten.nettopreis;
 				$("#preis").append(prodpreis + "&#8364;")

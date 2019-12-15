@@ -4,8 +4,10 @@ $(document).ready(function(){
 
 $(document).on("click","#remove_im_warenkorb", function(){
     value = $(this).val();
+
     deleteFromWarenkorb(value,0);
     location.reload();
+    console.log($(this));
 
 })
 
