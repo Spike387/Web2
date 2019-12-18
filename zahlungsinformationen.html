@@ -56,48 +56,55 @@
             </header>
             <form class="form_zusammenfassung offset-lg-4">
                 <div class="form-row">
-                    <div class="col-md-1 mb-3">
-                    <label for="Anrede">Anrede</label>
-                    <input type="text" class="form-control" id="Anrede"required>
+                    <div class="col-md-4 mb-3">
+                        <label for="zahlungsart"><h5>Anrede</h5></label><br/>
+                        Herr <input type="radio" name="Anrede" id="Anrede" value="Herr" required/>
+                        Frau <input type="radio" name="Anrede" id="Anrede" value="Frau"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
-                    <label for="Vorname">Vorname</label>
+                    <label for="Vorname"><h5>Vorname</h5></label>
                     <input type="text" class="form-control" id="Vorname"required>
                     </div>
                     <div class="col-md-3 mb-3">
-                    <label for="Nachname">Nachname</label>
+                    <label for="Nachname"><h5>Nachname</h5></label>
                     <input type="text" class="form-control" id="Nachname" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
-                    <label for="E-Mail">E-Mail</label>
+                    <label for="E-Mail"><h5>E-Mail</h5></label>
                     <input type="text" class="form-control" id="E-Mail"required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
-                    <label for="Straße">Straße/Nummer</label>
+                    <label for="Straße"><h5>Straße/Nummer</h5></label>
                     <input type="text" class="form-control" id="Straße"required>
                     </div>
                     <div class="col-md-2 mb-3">
-                    <label for="PLZ">PLZ</label>
+                    <label for="PLZ"><h5>PLZ</h5></label>
                     <input type="text" class="form-control" id="PLZ" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
-                    <label for="Stadt">Stadt</label>
+                    <label for="Stadt"><h5>Stadt</h5></label>
                     <input type="text" class="form-control" id="Stadt"required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
-                        <label for="zahlungsart">Bitte zahlungsart wählen</label><br/>
+                        <label for="zahlungsart"><h5>Bitte zahlungsart wählen</h5></label><br/>
                         Rechnung <input type="radio" name="zahlungsart" id="zahlungsart" value="Rechnung" required/>
-                        Vorkasse <input type="radio" name="zahlungsart" id="zahlungsart" value="Vorkasse"/>
+                        Vorkasse <input type="radio" name="zahlungsart" id="zahlungsart" value="Vorkasse" required/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                    <label for="Stadt" class="form-row"></label>
+                    Ich akzeptiere die AGB und Datenschutzerklärung <input type="checkbox" id="Stadt" required> 
                     </div>
                 </div>
                 <button class="btn btn-primary" type="button" id="bestellung_abschicken">Bestellen</button>
