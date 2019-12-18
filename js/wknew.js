@@ -1,21 +1,7 @@
 $(document).ready(function(){
     loadWarenkorbListe();
     console.log("wird im ready aufgerufen");
-    div_kauf = document.createElement('div');
-    div_kauf.className = 'row';
-    div_kauf.innerHTML = `
-        <div class="zusammenfassung col offset-lg-9">
-            <div class"col col-lg-12">
-                Gesamtpreis:
-                <p>Mehrwertsteuer: </p>
-                <p>Preis: </p>
-            </div>
-            <div class="col col-lg-12">
-                <button class="btn btn-warning kaufen col col-lg-12" type="button">KAUFEN</button>
-            </div>
-        </div>
-        `;
-    document.getElementById('kaufen-button').appendChild(div_kauf);
+    
 });
 
 
@@ -38,6 +24,7 @@ function loadWarenkorbListe() {
             produkte.push(key);
         }
     }
+    var gesamtpreis = 0;
     $.ajax ({
         url : "http://localhost:8000/api/produkt/alle",
         method : "get",
@@ -48,6 +35,7 @@ function loadWarenkorbListe() {
         for (var i = 0; i < response.daten.length; i++) {
           if (produkte.includes(response.daten[i].bezeichnung) && produkte != "")  
           { 
+            gesamtpreis += response.daten[i].bruttopreis;
             eintrag = $("<div>");
             eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:7.5rem"});
             prod_bild = $("<img>");
@@ -60,7 +48,7 @@ function loadWarenkorbListe() {
             eintrag.append(prod_text);
             prod_menge = $("<p>");
             prod_menge.prop("class", "col-md-1");
-            prod_menge.html("<b>Menge:</b><br><br>" + localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]);
+            prod_menge.html('<b>Menge:</b><br><input class="mengeinput" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');            
             console.log(localStorage.getItem(response.daten[i].bezeichnung).split(";"));
             eintrag.append(prod_menge);
             prod_preis = $("<p>");
@@ -74,8 +62,25 @@ function loadWarenkorbListe() {
             //div mit id 123 einfügen
             $("#123").append(eintrag);
   }
-  }}).fail(function () {
+  }
+  div_kauf = document.createElement('div');
+    div_kauf.className = 'row';
+    div_kauf.innerHTML = `
+        <div class="zusammenfassung col offset-lg-9">
+            <div class"col col-lg-12">
+                Preis ohne MwSt.: ${((gesamtpreis/119)*100).toFixed(2)}€</br>
+                Mehrwertsteuer: ${((gesamtpreis/119)*19).toFixed(2)}€
+                <p></p>    
+                <p>Gesamtpreis: ${gesamtpreis}€</p>
+            </div>
+            <div class="col col-lg-12">
+                <button class="btn btn-warning kaufen col col-lg-12" type="button">KAUFEN</button>
+            </div>
+        </div>
+        `;
+    $("#kaufen-button").empty();
+    document.getElementById('kaufen-button').appendChild(div_kauf);
+}).fail(function () {
     console.log("could not retrive products");
   });
-
 }
