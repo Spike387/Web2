@@ -1,8 +1,8 @@
-// Ohne Gesamt Aufruf funktionieren andere Aufrufe nicht!!! 
 $.ajax({
+// Ohne Gesamt Aufruf funktionieren andere Aufrufe nicht!!! 
     url: "http:localhost:8000/api/produkt/alle",
     method: "get"
-})
+});
 $(document).ready(function(){
     loadWarenkorb();
     $("#1").click(function(){
@@ -36,6 +36,7 @@ $(document).ready(function(){
         $("#produkt1_name").html(response.daten.bezeichnung);
         $("#produkt1_text").html(response.daten.beschreibung);
         $("#produkt1_preis").html(response.daten.bruttopreis + "€ inkl. MwSt.");
+        $("#produkt1").attr("src",response.daten.bilder[0].bildpfad);
     }).fail(function (jqXHR, statusText, error) {
         console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
     });
@@ -45,8 +46,10 @@ $(document).ready(function(){
         method: "get",
         dataType: "json"
     }).done(function (response) {
+        console.log(response.daten.bilder[0].bildpfad);
         $("#produkt2_name").html(response.daten.bezeichnung);
         $("#produkt2_text").html(response.daten.beschreibung);
+        $("#produkt2").attr("src",response.daten.bilder[0].bildpfad);
         $("#produkt2_preis").html(response.daten.bruttopreis + "€ inkl. MwSt.");
     }).fail(function (jqXHR, statusText, error) {
         console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
