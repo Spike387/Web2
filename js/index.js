@@ -46,7 +46,6 @@ $(document).ready(function(){
         method: "get",
         dataType: "json"
     }).done(function (response) {
-        console.log(response.daten.bilder[0].bildpfad);
         $("#produkt2_name").html(response.daten.bezeichnung);
         $("#produkt2_text").html(response.daten.beschreibung);
         $("#produkt2").attr("src",response.daten.bilder[0].bildpfad);
