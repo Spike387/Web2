@@ -1,19 +1,109 @@
-$(document).on("click","#bestellung_abschicken", function(event){
-    console.log("Das ist ein Test");
-    var objektperson = {"id":1,"anrede":"Frau","vorname":"Tobias","nachname":"Test","adresse":{"id":4},"telefonnummer":"012829342738","email":"Robin@test.com"};
-    var objektzahlungsart = {"id":2,"bezeichnung":"Rechnung"};
-    var objektprodukt = {"id":1,"kategorie":{},"bezeichnung":"Passwort Schulung","mehrwertsteuer":{},"nettopreis":172};
-    var objetktbestellpositionen = {"id": 33,"bestellung": {"id":1},   "produkt": objektprodukt,   "menge": 5,"mehrwertsteuersumme": 17.92,"nettosumme": 210.02,"bruttosumme": 227.94};
-    var objektbestellung = {"id":1,"bestellzeitpunkt":"15.10.2019 08:17:44", "besteller":objektperson,"zahlungsart":objektzahlungsart,"bestellpositionen":[objetktbestellpositionen]};
-    console.log(objektbestellung);
+$(document).ready(function(){
+    var produkte = []
+    var produkte_bestellung = [];
+    for (var key in localStorage){
+        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
+            produkte.push(key);
+        }
+    }
+    $("#anz_produkte").html(produkte.length);
+    const ul = document.createElement('ul');
+    ul.className = 'list-group mb-3';
+    var gesamtpreis = 0;
+    for (var i=0; i<produkte.length;i++) {
+        var warenkorb_value = localStorage.getItem(produkte[i]);
+        var aufgeteilt = warenkorb_value.split(";");
+        var produktname = "";
+        var produktbeschreibung = "";
+        var id = aufgeteilt[0];
+        var menge =     aufgeteilt[1];
+        var preis = aufgeteilt[2];
+        gesamtpreis += parseFloat(preis);
+        $.ajax({
+            url: 'http://localhost:8000/api/produkt/gib/' + id,
+            method: 'get',
+            dataType: "json"
+        }).done(function(response){
+            produkte_bestellung.push(response.daten);
+            produktname = response.daten.bezeichnung;
+            produktbeschreibung = response.daten.details;
+            ul.innerHTML += `<li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <h6 class="my-0">${produktname}</h6>
+          <small class="text-muted">${produktbeschreibung}</small>
+        </div>
+        <span class="text-muted">${preis}€</span>
+      </li>`
+        }).fail(function(){
+            console.log("Das hat nicht funktioniert!");
+        })
+
+        
+    }
+    ul.innerHTML += `<li class="list-group-item d-flex justify-content-between">
+    <span>Gesamt (Euro)</span>
+    <strong>${gesamtpreis}€</strong>
+  </li>`
+    $('#anhang_warenkorb').append(ul);
+    
+    $("#kaufen_abschicken").click(function(event){
+        var varichecked = document.getElementById("frau");
+        var anrede = "herr";
+        if (varichecked.checked){
+            anrede = "frau";
+        }
+        var adresse_id;
+        console.log("Das hat funktioniert");
+        event.preventDefault();
+        var adresse = {"strasse": document.getElementById("strasse_auswahl").value,"hausnummer": document.getElementById("hausnummer_auswahl").value, "plz": document.getElementById("plz_auswahl").value, "ort": document.getElementById("stadt_auswahl").value, "adresszusatz": document.getElementById("adresse2_auswahl").value,"land":{"id":44,"kennzeichnung":"DE","bezeichnung":"Deutschland"}}
+        console.log(adresse);
+        
     $.ajax({
-        url: "http://localhost:8000/api/bestellung",
+        url: "http://localhost:8000/api/adresse",
         method: "post",
         contentType: "application/json",
-        data: JSON.stringify(objektbestellung)
+        data: JSON.stringify(adresse)
     }).done(function(response){
-        console.log(response);
+        console.log("Adresse erfolgreich angelegt!");
+        adresse_id = response.daten.id;
+        var person = {"anrede":anrede,"vorname":document.getElementById("vorname_auswahl").value,"nachname":document.getElementById("nachname_auswahl").value,"adresse":{"id":adresse_id}, "email":document.getElementById("email_auswahl").value}
+    
+        $.ajax({
+            url: "http://localhost:8000/api/person",
+            method: "post",
+            contentType: "application/json",
+            data: JSON.stringify(person)
+        }).done(function(response){
+            console.log(response.daten.id);
+            var person_id = response.daten.id;
+            console.log("Person erfolgreich angelegt!");
+            var zahlungsart = 3;
+            var zahlungsart_bezeichnung = "vorkasse";
+            var zahlungsart_rechnung = document.getElementById("rechnung");
+            var zahlungsart_vorkasse = document.getElementById("vorkasse");
+            if (zahlungsart_rechnung.checked){
+                zahlungsart = 4;
+                zahlungsart_bezeichnung = "rechnung";
+            }
+            var bestellung = {"besteller": {"id":person_id},   "zahlungsart": { "id":zahlungsart,"bezeichnung": zahlungsart_bezeichnung},   "bestellpositionen": [], "total": {"mehrwertsteuer": 25.0,"netto": 200.0,"brutto": 225.0} }
+            $.ajax({
+                url: "http://localhost:8000/api/bestellung",
+                method: "post",
+                contentType: "application/json",
+                data: JSON.stringify(bestellung)
+            }).done(function(response){
+                console.log(response);
+            }).fail(function(jqXHR, statusText, error){
+                console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
+            });
+        }).fail(function(jqXHR, statusText, error){
+            console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
+        });
+        
     }).fail(function(jqXHR, statusText, error){
         console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
     });
+    
+    })
+    
 })
