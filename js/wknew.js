@@ -74,7 +74,7 @@ function loadWarenkorbListe() {
                 <p>Gesamtpreis: ${gesamtpreis}€</p>
             </div>
             <div class="col col-lg-12">
-                <button class="btn btn-warning kaufen col col-lg-12" type="button">KAUFEN</button>
+                <button class="btn btn-warning kaufen col col-lg-12" type="button"><a href="bestellbestaetigung.html">Bestellung fortsetzen</a></button>
             </div>
         </div>
         `;
