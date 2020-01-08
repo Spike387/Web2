@@ -1,0 +1,245 @@
+<html>
+<head>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="./css/bootstrap.css"/>
+        <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./css/bootstrap-theme.css"/>
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="./css/global.css"/>
+        <link rel="stylesheet" href="./css/cssstyles.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/bestellung_abschicken.js"></script>
+      </head>
+</head>
+<body class="bg-light">
+    <div class="container">   
+        <header>
+            <div class="row">
+                <nav class="navbar navbar-light bg-light navbar-expand-md col col-lg-12">
+                    <div class="col col-lg-1 offset-lg-1">
+                        <img src="img/logo.png" class="img-fluid" site="">
+                    </div>
+                    <ul class="nav col offset-lg-1">
+                        <li class="col col-lg-2 offset-lg-3 nav-item">
+                            <a href="#" class="nav-link">Home</a>
+                        </li>
+                        <li class="col col-lg-2 nav-item">
+                            <a href="./contact.html" class="nav-link">Kontakt</a>
+                        </li>
+                        <li class="col col-lg-2 nav-item">
+                            <a href="./produktliste.html" class="nav-link">Shop</a>
+                        </li>
+                        <li class="col col-lg-2 nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="warenkorb_anzeige">Warenkorb <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="warenkorb_anzeige">
+                            <li class="dropdown-item text-center" id="warenkorb_anzeige_produkte">
+                                <p>Ihr Warenkorb
+                                <br>ist leer</p>
+                            </li>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary btn-sm" id="warenkorb_anzeige_button">
+                                   <a href="./warenkorb.html">Warenkorb anzeigen</a>
+                                </button>
+                            </div>
+                        </ul>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+      <div class="row" id="warenkorb_rechts">
+        <div class="col-md-4 order-md-2 mb-4" id="anhang_warenkorb">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Ihr Warenkorb</span>
+            <span class="badge badge-secondary badge-pill" id="anz_produkte">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Rechnungsadresse</h4>
+          <form class="needs-validation" novalidate>
+            <div class="d-block my-3">
+              <label>Anrede</label>
+              <div class="custom-control custom-radio">
+                <input id="herr" name="anrede" type="radio" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="herr" value="herr">Herr</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="frau" name="anrede" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="frau" value="frau">Frau</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">Vorname</label>
+                <input type="text" class="form-control" id="vorname_auswahl" placeholder="Max" value="" required>
+                <div class="invalid-feedback">
+                  Vorname ist ein Pflichtfeld
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Nachname</label>
+                <input type="text" class="form-control" id="nachname_auswahl" placeholder="Mustermann" value="" required>
+                <div class="invalid-feedback">
+                  Nachname ist ein Pflichtfeld
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email_auswahl" placeholder="you@example.com">
+              <div class="invalid-feedback">
+                Bitte geben Sie ihre Email Adresse an
+              </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="address">Adresse</label>
+              <input type="text" class="form-control" id="strasse_auswahl" placeholder="Beispielstraße" required>
+              <div class="invalid-feedback">
+                Bitte geben Sie ihre Adresse an
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Hausnummer</label>
+              <input type="text" class="form-control" id="hausnummer_auswahl" placeholder="22" value="" required>
+              <div class="invalid-feedback">
+                Hausnummer ist ein Pflichtfeld
+              </div>
+            </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address2">Adresse 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="adresse2_auswahl" placeholder="Firma oder Eingang">
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName">Stadt</label>
+                  <input type="text" class="form-control" id="stadt_auswahl" placeholder="Beispielstadt" value="" required>
+                  <div class="invalid-feedback">
+                    Stadt ist ein Pflichtfeld
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName">PLZ</label>
+                  <input type="text" class="form-control" id="plz_auswahl" placeholder="75048" value="" required>
+                  <div class="invalid-feedback">
+                    PLZ ist ein Pflichtfeld
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="country">Land</label>
+                <select class="custom-select d-block w-100" id="land_auswahl" required>
+                  <option value="">Bitte auswählen</option>
+                  <option>Deutschland</option>
+                </select>
+                <div class="invalid-feedback">
+                  Bitte wählen Sie ein Land aus
+                </div>
+              </div>
+            </div>
+            
+            <hr class="mb-4">
+
+            <h4 class="mb-3">Zahlung</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="rechnung" name="zahlungsart" type="radio" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="rechnung">Rechnung</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="vorkasse" name="zahlungsart" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="vorkasse">Vorkasse</label>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" id="kaufen_abschicken">Artikel jetzt kaufen</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="row card-footer">
+        <div class="col col-lg-1 offset-md-1">
+            <a href="http://instagram.com" target="blank">
+                <img src="img/instagram.png">
+            </a>
+        </div>
+        <div class="col col-lg-1"> 
+            <a href="http://facebook.com" targer="blank">
+                <img src="img/facebook.png">
+            </a>
+        </div>
+        <div class="col col-lg-1"> 
+            <a href="http://twitter.com" target="blank">
+                <img src="img/twitter.png">
+            </a>
+        </div>
+        <div class="col col-lg-2 offset-md-1">
+            <ul class="list-unstyled">
+                <lh>Main Menu</lh>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="about.html">&#xDC;ber uns</a>
+                </li>
+                <li>
+                    <a href="produktliste.html">Shop</a>
+                </li>
+                <li>
+                    <a href="help.html">Hilfe</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col col-lg-2">
+            <ul class="list-unstyled">
+                <lh>Kategorien</lh>
+                <li>
+                    <a href="produktliste.html?id=1">Schulungen</a>
+                </li>
+                <li>
+                    <a href="produktliste.html?id=2">Sofware</a>
+                </li>
+                <li>
+                    <a href="produktliste.html?id=3">Penetration Testing</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col col-lg-2">
+            <ul class="list-unstyled">
+                <lh>Informationen</lh>
+                <li>
+                    <a href="impressum.html">Impressum</a>
+                </li>
+                <li>
+                    <a href="agb.html">AGB</a>
+                </li>
+                <li>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <div class="row">
+        <p>&#xA9; 2019 JoRoSi</p>
+    </div>
+    </div>
+
+
+</html>
