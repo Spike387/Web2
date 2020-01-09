@@ -45,7 +45,6 @@ $(document).ready(function(){
     <strong>${gesamtpreis}€</strong>
   </li>`
     $('#anhang_warenkorb').append(ul);
-    
     $("#kaufen_abschicken").click(function(event){
         var varichecked = document.getElementById("frau");
         var anrede = "herr";
@@ -53,10 +52,8 @@ $(document).ready(function(){
             anrede = "frau";
         }
         var adresse_id;
-        console.log("Das hat funktioniert");
         event.preventDefault();
         var adresse = {"strasse": document.getElementById("strasse_auswahl").value,"hausnummer": document.getElementById("hausnummer_auswahl").value, "plz": document.getElementById("plz_auswahl").value, "ort": document.getElementById("stadt_auswahl").value, "adresszusatz": document.getElementById("adresse2_auswahl").value,"land":{"id":44,"kennzeichnung":"DE","bezeichnung":"Deutschland"}}
-        console.log(adresse);
         
     $.ajax({
         url: "http://localhost:8000/api/adresse",
@@ -64,7 +61,6 @@ $(document).ready(function(){
         contentType: "application/json",
         data: JSON.stringify(adresse)
     }).done(function(response){
-        console.log("Adresse erfolgreich angelegt!");
         adresse_id = response.daten.id;
         var person = {"anrede":anrede,"vorname":document.getElementById("vorname_auswahl").value,"nachname":document.getElementById("nachname_auswahl").value,"adresse":{"id":adresse_id}, "email":document.getElementById("email_auswahl").value}
     
@@ -74,25 +70,42 @@ $(document).ready(function(){
             contentType: "application/json",
             data: JSON.stringify(person)
         }).done(function(response){
-            console.log(response.daten.id);
             var person_id = response.daten.id;
-            console.log("Person erfolgreich angelegt!");
             var zahlungsart = 3;
             var zahlungsart_bezeichnung = "vorkasse";
             var zahlungsart_rechnung = document.getElementById("rechnung");
             var zahlungsart_vorkasse = document.getElementById("vorkasse");
-            if (zahlungsart_rechnung.checked){
+            if (zahlungsart_rechnung.checked || zahlungsart_vorkasse.checked){
+                if (zahlungsart_rechnung.checked){
                 zahlungsart = 4;
                 zahlungsart_bezeichnung = "rechnung";
+                }
+            }else{
+                alert("Bitte wählen Sie eine Zahlungsart aus!");
             }
-            var bestellung = {"besteller": {"id":person_id},   "zahlungsart": { "id":zahlungsart,"bezeichnung": zahlungsart_bezeichnung},   "bestellpositionen": [], "total": {"mehrwertsteuer": 25.0,"netto": 200.0,"brutto": 225.0} }
+            var bestellpositionen = [];
+            for (var zaehler = 0; zaehler<produkte_bestellung.length;zaehler++){
+                var dummy = localStorage.getItem(produkte_bestellung[zaehler].bezeichnung);
+                var dummy_split = dummy.split(";");
+                var position = {"id":0,"produkt":produkte_bestellung[zaehler],"menge":dummy_split[1]};
+                bestellpositionen.push(position);
+            }
+            var bestellung = {
+                "besteller": {
+                    "id":person_id
+                }, 
+                "zahlungsart": { 
+                    "id":zahlungsart
+                },   
+                "bestellpositionen": bestellpositionen
+            };
             $.ajax({
                 url: "http://localhost:8000/api/bestellung",
                 method: "post",
                 contentType: "application/json",
                 data: JSON.stringify(bestellung)
             }).done(function(response){
-                console.log(response);
+                console.log("Die Bestellung wurde erfolgreich angelegt!");
             }).fail(function(jqXHR, statusText, error){
                 console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
             });
