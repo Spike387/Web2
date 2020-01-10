@@ -10,6 +10,7 @@ $(document).ready(function(){
     const ul = document.createElement('ul');
     ul.className = 'list-group mb-3';
     var gesamtpreis = 0;
+    console.log(produkte);
     for (var i=0; i<produkte.length;i++) {
         var warenkorb_value = localStorage.getItem(produkte[i]);
         var aufgeteilt = warenkorb_value.split(";");
@@ -17,8 +18,9 @@ $(document).ready(function(){
         var produktbeschreibung = "";
         var id = aufgeteilt[0];
         var menge =     aufgeteilt[1];
+        console.log();
         var preis = aufgeteilt[2];
-        gesamtpreis += parseFloat(preis);
+        gesamtpreis += menge * parseFloat(preis);
         $.ajax({
             url: 'http://localhost:8000/api/produkt/gib/' + id,
             method: 'get',
@@ -30,6 +32,7 @@ $(document).ready(function(){
             ul.innerHTML += `<li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 class="my-0">${produktname}</h6>
+          <small class="text-muted">Menge: ${menge}</small></br>
           <small class="text-muted">${produktbeschreibung}</small>
         </div>
         <span class="text-muted">${preis}€</span>
@@ -52,7 +55,6 @@ $(document).ready(function(){
             anrede = "frau";
         }
         var adresse_id;
-        event.preventDefault();
         var adresse = {"strasse": document.getElementById("strasse_auswahl").value,"hausnummer": document.getElementById("hausnummer_auswahl").value, "plz": document.getElementById("plz_auswahl").value, "ort": document.getElementById("stadt_auswahl").value, "adresszusatz": document.getElementById("adresse2_auswahl").value,"land":{"id":44,"kennzeichnung":"DE","bezeichnung":"Deutschland"}}
         
     $.ajax({
@@ -72,13 +74,11 @@ $(document).ready(function(){
         }).done(function(response){
             var person_id = response.daten.id;
             var zahlungsart = 3;
-            var zahlungsart_bezeichnung = "vorkasse";
             var zahlungsart_rechnung = document.getElementById("rechnung");
             var zahlungsart_vorkasse = document.getElementById("vorkasse");
             if (zahlungsart_rechnung.checked || zahlungsart_vorkasse.checked){
                 if (zahlungsart_rechnung.checked){
                 zahlungsart = 4;
-                zahlungsart_bezeichnung = "rechnung";
                 }
             }else{
                 alert("Bitte wählen Sie eine Zahlungsart aus!");
@@ -106,6 +106,9 @@ $(document).ready(function(){
                 data: JSON.stringify(bestellung)
             }).done(function(response){
                 console.log("Die Bestellung wurde erfolgreich angelegt!");
+                localStorage.setItem("bestellung",response.daten.id);
+                mailSenden(person.vorname,person.nachname,person.email);
+                window.location.replace("./zusammenfassung.html");
             }).fail(function(jqXHR, statusText, error){
                 console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
             });
@@ -120,3 +123,20 @@ $(document).ready(function(){
     })
     
 })
+
+function mailSenden(vorname,nachname,email){
+    var zusammensetzung = vorname + nachname;
+    var mailobjekt = {"name":zusammensetzung,"email":email,"nachricht":"Sie haben eine neue Bestellung"}
+    $.ajax({
+        url: "http://localhost:8000/api/mail",
+        method: "post",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(mailobjekt)
+    }).done(function(){
+        console.log("Mail wurde versendet!");
+    }).fail(function(error){
+        console.log("das tut nicht: " + error);
+        console.log(error);
+    });
+}
