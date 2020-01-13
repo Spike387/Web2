@@ -17,7 +17,7 @@ $(document).ready(function(){
         dataType: "json"
     }).done(function(response){
         console.log(response.daten); // Hier musst du die Darstellung einfügen
-        $("#123").empty();
+        $("#bestellung").empty();
         for (var i = 0; i < response.daten.length; i++) {  
             { 
                 eintrag = $("<div>");
