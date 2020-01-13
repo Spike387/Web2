@@ -35,7 +35,7 @@ function loadWarenkorbListe() {
         for (var i = 0; i < response.daten.length; i++) {
           if (produkte.includes(response.daten[i].bezeichnung) && produkte != "")  
           { 
-            gesamtpreis += response.daten[i].bruttopreis;
+            gesamtpreis += (response.daten[i].bruttopreis * localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]);
             eintrag = $("<div>");
             eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:7.5rem"});
             prod_bild = $("<img>");
@@ -53,7 +53,7 @@ function loadWarenkorbListe() {
             eintrag.append(prod_menge);
             prod_preis = $("<p>");
             prod_preis.prop("class", "col col-md-1");
-            prod_preis.html("<b>Preis:</b> <br>" + response.daten[i].bruttopreis + "&euro;");
+            prod_preis.html("<b>Preis:</b> <br>" + (response.daten[i].bruttopreis *localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]) + "&euro;");
             remove_btn = $("<button>");
             remove_btn.prop({class:"col col-md-1 btn btn-primary remove", type: "button", id:"remove_im_warenkorb", name:response.daten[i].bezeichnung});
             remove_btn.html('<i class="fas fa-trash-alt"></i>');
