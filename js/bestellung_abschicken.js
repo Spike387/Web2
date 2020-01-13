@@ -27,12 +27,14 @@ $(document).ready(function(){
             dataType: "json"
         }).done(function(response){
             produkte_bestellung.push(response.daten);
+            var menge = localStorage.getItem(response.daten.bezeichnung);
+            var menge_split = menge.split(";");
             produktname = response.daten.bezeichnung;
             produktbeschreibung = response.daten.details;
             ul.innerHTML += `<li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 class="my-0">${produktname}</h6>
-          <small class="text-muted">Menge: ${menge}</small></br>
+          <small class="text-muted">Menge: ${menge_split[1]}</small></br>
           <small class="text-muted">${produktbeschreibung}</small>
         </div>
         <span class="text-muted">${preis}€</span>
@@ -49,6 +51,7 @@ $(document).ready(function(){
   </li>`
     $('#anhang_warenkorb').append(ul);
     $("#kaufen_abschicken").click(function(event){
+        event.preventDefault();
         var varichecked = document.getElementById("frau");
         var anrede = "herr";
         if (varichecked.checked){
