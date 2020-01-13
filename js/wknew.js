@@ -48,8 +48,9 @@ function loadWarenkorbListe() {
             eintrag.append(prod_text);
             prod_menge = $("<p>");
             prod_menge.prop("class", "col-md-1");
-            prod_menge.html('<b>Menge:</b><br><input class="mengeinput" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');            
-            console.log(localStorage.getItem(response.daten[i].bezeichnung).split(";"));
+            prod_menge.html('<b>Menge:</b><br><input class="mengeinput" id="${response.daten[i].id}" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');
+
+            console.log(response.daten[i].id);
             eintrag.append(prod_menge);
             prod_preis = $("<p>");
             prod_preis.prop("class", "col col-md-1");
@@ -83,4 +84,13 @@ function loadWarenkorbListe() {
 }).fail(function () {
     console.log("could not retrive products");
   });
+    var input_change = document.getElementsByClassName("mengeinput");
+    for (var i = 0; input_change.length; i++){
+        input_change[i].addEventListener("change",onChangeHandler,false);
+        window.refresh(true);
+        console.log("Das hat funktinoniert!!!");
+    }
+}
+function onChangeHandler(){
+    window.refresh(true);
 }
