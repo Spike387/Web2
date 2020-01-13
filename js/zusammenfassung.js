@@ -3,27 +3,24 @@ $(document).ready(function(){
     for (var key in localStorage){
         if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
             produkte.push(key);
-            console.log(key);
+            //console.log(key);
         }
     }
     //for (var loesche in produkte){
         //localStorage.removeItem(produkte[loesche]);
     //}
-    console.log("Hallo")
+    
     var bestellid = localStorage.getItem("bestellung");
-    var gesamtpreis;
+    var counter = 0;
     $.ajax({
         url: "http://localhost:8000/api/bestellung/gib/"+bestellid,
         method: "get",
         dataType: "json"
     }).done(function(response){
         console.log(response.daten); // Hier musst du die Darstellung einfügen
-        $("#anhang_zusammenfassung").empty();
-            console.log("Hallo2")
             for (var i in response.daten.bestellpositionen){
-                gesamtpreis += response.daten.bestellpositionen[i].bruttosumme;
                 eintrag = $("<div>");
-                eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:7.5rem"});
+                eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:3.5rem"});
                 prod_text = $("<p>");
                 prod_text.prop("class","col col-md-6 mh-100 overflow-hidden")
                 prod_text.html("<b>"+response.daten.bestellpositionen[i].produkt.bezeichnung);
@@ -31,18 +28,55 @@ $(document).ready(function(){
 
                 prod_menge = $("<p>");
                 prod_menge.prop("class", "col-md-1");
-                console.log(response.daten.bestellpositionen[i]);
-                prod_menge.html('<b>Menge:'+response.daten.bestellpositionen[i].menge);            
+                prod_menge.html('<b>Menge: <br>'+response.daten.bestellpositionen[i].menge);            
                 eintrag.append(prod_menge);
 
                 prod_preis = $("<p>");
                 prod_preis.prop("class", "col col-md-1");
                 prod_preis.html("<b>Preis:</b> <br>" + response.daten.bestellpositionen[i].bruttosumme + "&euro;");
                 eintrag.append(prod_preis);
-                //div mit id 123 einfügen
-                $("#anhang_zusammenfassung").append(eintrag);
+
+                $("#bestellung").append(eintrag);
             }
             
+            var gesamtpreis = response.daten.total.brutto
+            eintrag = $("<div>");
+            eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:3.5rem"});
+            prod_gesamtpreis = $("<p>")
+            prod_gesamtpreis.prop("class", "col col-md-1");
+            prod_gesamtpreis.html("<b>Gesamtpreis:</b> <br>" + gesamtpreis);
+            eintrag.append(prod_gesamtpreis);
+            $("#bestellung").append(eintrag);
+            
+            // Rechnungsadresse
+
+            
+            anrede = $("<p>");
+            anrede.html(response.daten.besteller.anrede);
+            $("#rechnung").append(anrede);
+
+            bestellername = $("<p>");
+            bestellername.html(response.daten.besteller.vorname + " " + response.daten.besteller.nachname);
+            $("#rechnung").append(bestellername);
+
+            street = $("<p>");
+            street.html(response.daten.besteller.adresse.strasse + " " + response.daten.besteller.adresse.hausnummer);
+            $("#rechnung").append(street);
+
+            plz = $("<p>");
+            plz.html(response.daten.besteller.adresse.plz + " " + response.daten.besteller.adresse.ort);
+            $("#rechnung").append(plz);
+
+            email = $("<p>");
+            email.html(response.daten.besteller.email);
+            $("#rechnung").append(email);
+
+            //Zahlungsart
+
+            zahlungsart = $("<p>");
+            zahlungsart.html(response.daten.zahlungsart.bezeichnung);
+            $("#zahlung").append(zahlungsart);
+
     //localStorage.removeItem("bestellung");
     }).fail(function(response){
         console.log("Das hat nicht funktioniert!!!");
