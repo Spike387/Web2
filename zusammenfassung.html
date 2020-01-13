@@ -1,97 +1,115 @@
+<!DOCTYPE html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/bootstrap-theme.css">
-    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="./css/global.css">
-    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/warenkorb.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/zusammenfassung.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="./css/bootstrap.css"/>
+  <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/cssstyles.css"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/zusammenfassung.js"></script>
 </head>
-
-<body>
+<html>
+  <body>
     <div class="container">
-        <header>
-            <div class="row">
-                <nav class="navbar navbar-light bg-light navbar-expand-md col col-lg-12">
-                    <div class="col col-lg-1 offset-lg-1">
-                        <img src="img/logo.png" class="img-fluid" site="">
-                    </div>
-                    <div id="output"></div>
-                    <ul class="nav col offset-lg-1">
-                        <li class="col col-lg-2 offset-lg-3 nav-item"><a href="index.html" class="nav-link">Home</a>
-                        </li>
-                        <li class="col col-lg-2 nav-item"><a href="contact.html" class="nav-link">Kontakt</a>
-                        </li>
-                        <li class="col col-lg-2 nav-item"><a href="./produktliste.html" class="nav-link">Shop</a>
-                        </li>
-                        <li class="col col-lg-2 nav-item">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Warenkorb <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" id="warenkorb_artikel_anzeige">
-                                    <li class="dropdown-item">
-                                        <p>Keine Artikel
-                                            <br>im Warenkorb</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-       
-<footer class="row card-footer">
-  <div class="col col-lg-1 offset-md-1"> <a href="http://instagram.com" target="blank"><img src="img/instagram.png"></a>
-  </div>
-  <div class="col col-lg-1"> <a href="http://facebook.com" targer="blank"><img src="img/facebook.png"></a>
-  </div>
-  <div class="col col-lg-1"> <a href="http://twitter.com" target="blank"><img src="img/twitter.png"></a>
-  </div>
-  <div class="col col-lg-2 offset-md-1">
-      <ul class="list-unstyled">
-          <lh>Main Menu</lh>
-          <li><a href="index.html">Home</a>
-          </li>
-          <li><a href="about.html">&#xDC;ber uns</a>
-          </li>
-          <li><a href="produktliste.html">Shop</a>
-          </li>
-          <li><a href="help.html">Hilfe</a>
-          </li>
-      </ul>
-  </div>
-  <div class="col col-lg-2">
-      <ul class="list-unstyled">
-          <lh>Kategorien</lh>
-          <li><a href="produktliste.html?id=1">Schulungen</a>
-          </li>
-          <li><a href="produktliste.html?id=2">Sofware</a>
-          </li>
-          <li><a href="produktliste.html?id=3">Penetration Testing</a>
-          </li>
-      </ul>
-  </div>
-  <div class="col col-lg-2">
-      <ul class="list-unstyled">
-          <lh>Informationen</lh>
-          <li><a href="impressum.html">Impressum</a>
-          </li>
-          <li><a href="agb.html">AGB</a>
-          </li>
-          <li><a href="datenschutz.html">Datenschutz</a>
-          </li>
-      </ul>
-  </div>
-</footer>
-<div class="row">
-  <p>&#xA9; 2019 JoRoSi</p>
-</div>
-</div>
-</body>
+      <header>
+      <div class="row">
+          <nav class="navbar navbar-light bg-light navbar-expand-md col col-lg-12">
+              <div class="col col-lg-1 offset-lg-1">
+                  <img src="img/logo.png" class="img-fluid" site="">
+              </div>
+              <ul class="nav col offset-lg-1">
+                  <li class="col col-lg-2 offset-lg-3 nav-item">
+                      <a href="index.html" class="nav-link">Home</a>
+                  </li>
+                  <li class="col col-lg-2 nav-item">
+                      <a href="./contact.html" class="nav-link">Kontakt</a>
+                  </li>
+                  <li class="col col-lg-2 nav-item">
+                      <a href="./produktliste.html" class="nav-link">Shop</a>
+                  </li>
+                  <li class="col col-lg-2 nav-item">
+                  <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="warenkorb_anzeige">Warenkorb <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" id="warenkorb_anzeige">
+                      <li class="dropdown-item text-center" id="warenkorb_anzeige_produkte">
+                          <p>Ihr Warenkorb
+                          <br>ist leer</p>
+                      </li>
+                      <div class="text-center">
+                          <button type="button" class="btn btn-secondary btn-sm" id="warenkorb_anzeige_button">
+                             <a href="./warenkorb.html">Warenkorb anzeigen</a>
+                          </button>
+                      </div>
+                  </ul>
+              </ul>
+          </nav>
+        </div>
+      </header>
+  <!-- Ende Header Anfang Seiten Content/Sidebar-->
+                <h1>Vielen Dank für Ihre Bestellung!</h1>
+                <h3>Hier finden Sie nochmal alle Informationen zu Ihrer Bestellung:</h3>
+                 <div class="container-fluid" id="rechnung">
+                     <h5>Rechnungsadresse:</h5>
+                 </div>
+                 <div class="container-fluid" id="bestellung">
+                     <h5>Bestellung:</h5>
+                
+                 </div>
+                 <div class="container-fluid" id="zahlung">
+                    <h5>Zahlungsart:</h5>
+                </div>
+                 
+                <footer class="row card-footer">
+                        <div class="col col-lg-1 offset-md-1"> <a href="http://instagram.com" target="blank"><img src="img/instagram.png"></a>
+                          </div>
+                            <div class="col col-lg-1"> <a href="http://facebook.com" targer="blank"><img src="img/facebook.png"></a>
+                              </div>
+                                <div class="col col-lg-1"> <a href="http://twitter.com" target="blank"><img src="img/twitter.png"></a>
+                                  </div>
+                                    <div class="col col-lg-2 offset-md-1">
+                                        <ul class="list-unstyled">
+                                            <lh>Main Menu</lh>
+                                            <li><a href="index.html">Home</a>
+                                            </li>
+                                            <li><a href="about.html">&#xDC;ber uns</a>
+                                            </li>
+                                            <li><a href="produktliste.html">Shop</a>
+                                            </li>
+                                            <li><a href="help.html">Hilfe</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-lg-2">
+                                        <ul class="list-unstyled">
+                                            <lh>Kategorien</lh>
+                                            <li><a href="produktliste.html?id=1">Schulungen</a>
+                                            </li>
+                                            <li><a href="produktliste.html?id=2">Sofware</a>
+                                            </li>
+                                            <li><a href="produktliste.html?id=3">Penetration Testing</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-lg-2">
+                                        <ul class="list-unstyled">
+                                            <lh>Informationen</lh>
+                                            <li><a href="impressum.html">Impressum</a>
+                                            </li>
+                                            <li><a href="agb.html">AGB</a>
+                                            </li>
+                                            <li><a href="datenschutz.html">Datenschutz</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                </footer>
+                <div class="row">
+                    <p>&#xA9; 2019 JoRoSi</p>
+                </div>
+        </div>
+    </body>
