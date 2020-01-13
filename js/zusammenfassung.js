@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var produkte = []
     for (var key in localStorage){
-        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter"){
+        if (key != "zaehler" && key != "key" && key != "getItem" && key != "setItem" && key != "removeItem" && key != "clear" && key != "length" && key!="Newsletter" && key!="bestellung"){
             produkte.push(key);
             console.log(key);
         }
@@ -10,9 +10,8 @@ $(document).ready(function(){
         localStorage.removeItem(produkte[loesche]);
     }
 
-    var bestellid = localStorage.getItem("bestellung");
     $.ajax({
-        url: "http://localhost:8000/api/bestellung/gib/"+bestellid,
+        url: "http://localhost:8000/api/bestellung/gib/"+localStorage.getItem("bestellung"),
         method: "get",
         dataType: "json"
     }).done(function(response){

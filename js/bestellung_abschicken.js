@@ -54,6 +54,7 @@ $(document).ready(function(){
         if (varichecked.checked){
             anrede = "frau";
         }
+        event.preventDefault();
         var adresse_id;
         var adresse = {"strasse": document.getElementById("strasse_auswahl").value,"hausnummer": document.getElementById("hausnummer_auswahl").value, "plz": document.getElementById("plz_auswahl").value, "ort": document.getElementById("stadt_auswahl").value, "adresszusatz": document.getElementById("adresse2_auswahl").value,"land":{"id":44,"kennzeichnung":"DE","bezeichnung":"Deutschland"}}
         
