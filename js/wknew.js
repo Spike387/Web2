@@ -69,10 +69,18 @@ function loadWarenkorbListe() {
     div_kauf.innerHTML = `
         <div class="zusammenfassung col offset-lg-9">
             <div class"col col-lg-12">
-                Preis ohne MwSt.: ${((gesamtpreis/119)*100).toFixed(2)}€</br>
-                Mehrwertsteuer: ${((gesamtpreis/119)*19).toFixed(2)}€
-                <p></p>    
-                <p>Gesamtpreis: ${gesamtpreis}€</p>
+                <table>
+                    <tr> 
+                    <th>Preis ohne MwSt.:</th><td class="text-right">${((gesamtpreis/119)*100).toFixed(2)}€</td>
+                    </tr>
+                    <tr>
+                    <th>Mehrwertsteuer:</th><td class="text-right">${((gesamtpreis/119)*19).toFixed(2)}€</td>
+                    </tr>
+                    <tr><hr class="hr"></tr>
+                    <tr>    
+                    <th>Gesamtpreis:</th><td class="text-right">${gesamtpreis.toFixed(2)}€</td>
+                    </tr>    
+                </table>
             </div>
             <div class="col col-lg-12">
                 <button class="btn btn-warning kaufen col col-lg-12" type="button"><a href="bestellbestaetigung.html">Bestellung fortsetzen</a></button>
