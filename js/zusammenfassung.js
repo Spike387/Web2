@@ -6,9 +6,6 @@ $(document).ready(function(){
             //console.log(key);
         }
     }
-    //for (var loesche in produkte){
-        //localStorage.removeItem(produkte[loesche]);
-    //}
     
     var bestellid = localStorage.getItem("bestellung");
     var counter = 0;
@@ -17,7 +14,6 @@ $(document).ready(function(){
         method: "get",
         dataType: "json"
     }).done(function(response){
-        console.log(response.daten); // Hier musst du die Darstellung einfügen
             for (var i in response.daten.bestellpositionen){
                 eintrag = $("<div>");
                 eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:3.5rem"});
@@ -38,7 +34,6 @@ $(document).ready(function(){
 
                 $("#bestellung").append(eintrag);
             }
-            //Gesamtpreis
             
             var gesamtpreis = response.daten.total.brutto
             eintrag = $("<div>");
@@ -50,44 +45,38 @@ $(document).ready(function(){
             $("#bestellung").append(eintrag);
             
             // Rechnungsadresse
-            var br = document.createElement("br");
 
-            rechnungsdiv = $("<div>")
-            rechnungsdiv.prop({class : "m-3 bg-light border border-primary", style:"height:12.5rem"});
-
+            
             anrede = $("<p>");
             anrede.html(response.daten.besteller.anrede);
-            rechnungsdiv.append(anrede);
+            $("#rechnung").append(anrede);
 
             bestellername = $("<p>");
             bestellername.html(response.daten.besteller.vorname + " " + response.daten.besteller.nachname);
-            rechnungsdiv.append(bestellername);
+            $("#rechnung").append(bestellername);
 
             street = $("<p>");
             street.html(response.daten.besteller.adresse.strasse + " " + response.daten.besteller.adresse.hausnummer);
-            rechnungsdiv.append(street);
+            $("#rechnung").append(street);
 
             plz = $("<p>");
             plz.html(response.daten.besteller.adresse.plz + " " + response.daten.besteller.adresse.ort);
-            rechnungsdiv.append(plz);
+            $("#rechnung").append(plz);
 
             email = $("<p>");
             email.html(response.daten.besteller.email);
-            rechnungsdiv.append(email);
-        
-
-            $("#rechnung").append(rechnungsdiv)
+            $("#rechnung").append(email);
 
             //Zahlungsart
 
-            zahldiv = $("<div>");
-            zahldiv.prop({class : "row m-3 bg-light border border-primary", style:"height:2rem"});
             zahlungsart = $("<p>");
             zahlungsart.html(response.daten.zahlungsart.bezeichnung);
-            zahldiv.append(zahlungsart);
-            $("#zahlung").append(zahldiv);
+            $("#zahlung").append(zahlungsart);
 
-    //localStorage.removeItem("bestellung");
+            localStorage.removeItem("bestellung");
+            for (var loesche in produkte){
+                localStorage.removeItem(produkte[loesche]);
+            }
     }).fail(function(response){
         console.log("Das hat nicht funktioniert!!!");
     });    
