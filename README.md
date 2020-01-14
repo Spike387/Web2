@@ -2,7 +2,7 @@
 
 
 Web 2 Webpages und Backend
-<<<<<<< HEAD
+
 Das habe ich lokal hinzugefügt
 =======
 
