@@ -77,6 +77,7 @@ $(document).ready(function(){
             for (var loesche in produkte){
                 localStorage.removeItem(produkte[loesche]);
             }
+            loadWarenkorb();
     }).fail(function(response){
         console.log("Das hat nicht funktioniert!!!");
     });    
