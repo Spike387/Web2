@@ -14,6 +14,17 @@ $(document).on("click","#remove_im_warenkorb", function () {
     loadWarenkorb();
     loadWarenkorbListe();
 });
+$(document).on("click","#menge_im_warenkorb", function () {
+    value = $(this).prop("name");
+    menge = document.getElementById(value).value;
+    console.log("call menge function");
+    console.log("entferne: " + value);
+    //deleteFromWarenkorb(value,0);
+    toWarenkorb(value,1,menge);
+    // Warenkorbliste neu laden
+    loadWarenkorb();
+    loadWarenkorbListe();
+});
   
 
 function loadWarenkorbListe() {
@@ -33,37 +44,42 @@ function loadWarenkorbListe() {
         console.log(response);
         $("#123").empty();
         for (var i = 0; i < response.daten.length; i++) {
-          if (produkte.includes(response.daten[i].bezeichnung) && produkte != "")  
-          { 
-            gesamtpreis += (response.daten[i].bruttopreis * localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]);
-            eintrag = $("<div>");
-            eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:7.5rem"});
-            prod_bild = $("<img>");
-            prod_bild.prop({class : "col mh-100 col-md-2", src : response.daten[i].bilder[0].bildpfad, alt : "Produktbild"});
-            eintrag.html(prod_bild);
-            prod_text = $("<p>");
-            prod_text.prop("class","col col-md-6 mh-100 overflow-hidden")
-            prod_text.html("<b>"+response.daten[i].bezeichnung +"</b><br>"+response.daten[i].beschreibung);
+            console.log(produkte != "")
+            if (produkte.includes(response.daten[i].bezeichnung) && produkte != "")  
+            { 
+                gesamtpreis += (response.daten[i].bruttopreis * localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]);
+                eintrag = $("<div>");
+                eintrag.prop({class : "row m-3 bg-light border border-primary", style:"height:7.5rem"});
+                prod_bild = $("<img>");
+                prod_bild.prop({class : "col mh-100 col-md-2", src : response.daten[i].bilder[0].bildpfad, alt : "Produktbild"});
+                eintrag.html(prod_bild);
+                prod_text = $("<p>");
+                prod_text.prop("class","col col-md-6 mh-100 overflow-hidden")
+                prod_text.html("<b>"+response.daten[i].bezeichnung +"</b><br>"+response.daten[i].beschreibung);
 
-            eintrag.append(prod_text);
-            prod_menge = $("<p>");
-            prod_menge.prop("class", "col-md-1");
-            prod_menge.html('<b>Menge:</b><br><input class="mengeinput" id="${response.daten[i].id}" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');
+                eintrag.append(prod_text);
+                prod_menge = $("<p>");
+                prod_menge.prop("class", "col-md-1");
+                prod_menge.html('<b>Menge:</b><br><input class="mengeinput" id="'+response.daten[i].bezeichnung+'" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');
 
-            console.log(response.daten[i].id);
-            eintrag.append(prod_menge);
-            prod_preis = $("<p>");
-            prod_preis.prop("class", "col col-md-1");
-            prod_preis.html("<b>Preis:</b> <br>" + (response.daten[i].bruttopreis *localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]) + "&euro;");
-            remove_btn = $("<button>");
-            remove_btn.prop({class:"col col-md-1 btn btn-primary remove", type: "button", id:"remove_im_warenkorb", name:response.daten[i].bezeichnung});
-            remove_btn.html('<i class="fas fa-trash-alt"></i>');
-            eintrag.append(remove_btn);
-            eintrag.append(prod_preis);
-            //div mit id 123 einfügen
-            $("#123").append(eintrag);
-  }
-  }
+                console.log(response.daten[i].id);
+                eintrag.append(prod_menge);
+                prod_preis = $("<p>");
+                prod_preis.prop("class", "col col-md-1");
+                prod_preis.html("<b>Preis:</b> <br>" + (response.daten[i].bruttopreis *localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]) + "&euro;");
+                menge_btn = $("<button>");
+                menge_btn.prop({class:"col col-md-1 btn btn-primary", type: "button", id:"menge_im_warenkorb", name:response.daten[i].bezeichnung});
+                menge_btn.html('<i class="fas fa-refresh-alt"></i>');
+                remove_btn = $("<button>");
+                remove_btn.prop({class:"col col-md-1 btn btn-primary remove", type: "button", id:"remove_im_warenkorb", name:response.daten[i].bezeichnung});
+                remove_btn.html('<i class="fas fa-trash-alt"></i>');
+                eintrag.append(menge_btn);
+                eintrag.append(remove_btn);
+                eintrag.append(prod_preis);
+                //div mit id 123 einfügen
+                $("#123").append(eintrag);
+            }
+        }
   div_kauf = document.createElement('div');
     div_kauf.className = 'row';
     div_kauf.innerHTML = `
@@ -83,22 +99,16 @@ function loadWarenkorbListe() {
                 </table>
             </div>
             <div class="col col-lg-12">
-                <button class="btn btn-warning kaufen col col-lg-12" type="button"><a href="bestellbestaetigung.html">Bestellung fortsetzen</a></button>
+                <a href="bestellbestaetigung.html">
+                    <button class="btn btn-warning kaufen col col-lg-12" type="button">Bestellung fortsetzen</button>
+                </a>
             </div>
         </div>
         `;
     $("#kaufen-button").empty();
-    document.getElementById('kaufen-button').appendChild(div_kauf);
+    if (produkte != ""){    document.getElementById('kaufen-button').appendChild(div_kauf);}
+    else {$("#123").html("<h2>Keine Produkte im Warenkorb</h2>")}
 }).fail(function () {
     console.log("could not retrive products");
   });
-    var input_change = document.getElementsByClassName("mengeinput");
-    for (var i = 0; input_change.length; i++){
-        input_change[i].addEventListener("change",onChangeHandler,false);
-        window.refresh(true);
-        console.log("Das hat funktinoniert!!!");
-    }
-}
-function onChangeHandler(){
-    window.refresh(true);
 }

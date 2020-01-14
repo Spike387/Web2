@@ -9,7 +9,14 @@ function toWarenkorb(name,id,menge,preis){
         var aufgeteilt = warenkorb_value.split(";");
         var warenkorb_id = aufgeteilt[0];
         var warenkorb_menge = parseInt(aufgeteilt[1]);
-        warenkorb_menge += parseInt(menge);
+        if (parseInt(id) == 1)
+        {
+            warenkorb_menge = parseInt(menge);
+        }
+        else
+        {
+            warenkorb_menge += parseInt(menge);
+        }
         warenkorb_value = warenkorb_id + ";" + warenkorb_menge.toString() + ";" + aufgeteilt[2];
 
     }

@@ -54,9 +54,8 @@
 				method : "get",
 				dataType : "json"
 			}).done(function(response) {
-				console.log(response.daten.bezeichnung);
+				console.log(response.daten);
 				console.log(typeof(response.daten.bezeichnung));
-				console.log(prodbez);
 				prodbez = JSON.parse(JSON.stringify(response.daten));
 				$("#getprodukt").text(prodbez.bezeichnung);
 				$("#prod_bild").prop({src: response.daten.bilder[0].bildpfad, style:"height:180px"});
@@ -64,6 +63,8 @@
 				$("#beschreibung").html(response.daten.beschreibung);
 				prodpreis = response.daten.nettopreis;
 				$("#preis").append(prodpreis + "&#8364;")
+				$("#prodnr").append(response.daten.id);
+                console.log("aasdasdasdasdasdasdasd"+response.daten.id);
 			}).fail(function(jqXHR, statusText, error){
 				console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText);
 				$("#beschreibung").html("ein Fehler ist aufgetretten");
@@ -73,6 +74,6 @@
 				console.log("erfolgreich zum Warenkorb hunzugefügt.");
 				toWarenkorb(prodbez.bezeichnung, prodid, '1', prodpreis);
 				loadWarenkorb();
-				alert("hinzugefügt");
+				alert("Zum Warenkorb hinzugefügt");
 			});
 		});
