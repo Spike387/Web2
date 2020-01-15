@@ -6,8 +6,12 @@
 
 }
 
-.warenkorb {
+#rechnung div{
+    padding-left: 2%;
+}
 
+#zahlung div{
+    padding-left: 2%;
 }
 
 .wk {
