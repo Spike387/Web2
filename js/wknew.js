@@ -61,20 +61,21 @@ function loadWarenkorbListe() {
                 prod_menge = $("<p>");
                 prod_menge.prop("class", "col-md-1");
                 prod_menge.html('<b>Menge:</b><br><input class="mengeinput" id="'+response.daten[i].bezeichnung+'" type="text" name="" value='+localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]+'><br>');
-
-                console.log(response.daten[i].id);
                 eintrag.append(prod_menge);
                 prod_preis = $("<p>");
                 prod_preis.prop("class", "col col-md-1");
                 prod_preis.html("<b>Preis:</b> <br>" + (response.daten[i].bruttopreis *localStorage.getItem(response.daten[i].bezeichnung).split(";")[1]) + "&euro;");
+                div_zusatz = $("<div>");
+                div_zusatz.prop({class:"col"})
                 menge_btn = $("<button>");
-                menge_btn.prop({class:"col col-md-1 btn btn-primary remove", type: "button", id:"menge_im_warenkorb", name:response.daten[i].bezeichnung});
+                menge_btn.prop({class:"btn btn-primary remove", type: "button", id:"menge_im_warenkorb", name:response.daten[i].bezeichnung});
                 menge_btn.html('<i class="fas fa-sync-alt fa-spin"></i>');
                 remove_btn = $("<button>");
-                remove_btn.prop({class:"col col-md-1 btn btn-primary remove", type: "button", id:"remove_im_warenkorb", name:response.daten[i].bezeichnung});
+                remove_btn.prop({class:"btn btn-primary remove", type: "button", id:"remove_im_warenkorb", name:response.daten[i].bezeichnung});
                 remove_btn.html('<i class="fas fa fa-trash-alt"></i>');
-                eintrag.append(menge_btn);
-                eintrag.append(remove_btn);
+                div_zusatz.append(menge_btn);
+                div_zusatz.append(remove_btn);
+                eintrag.append(div_zusatz);
                 eintrag.append(prod_preis);
                 //div mit id 123 einfügen
                 $("#123").append(eintrag);
