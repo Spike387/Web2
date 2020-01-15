@@ -6,9 +6,9 @@ $(document).ready(function(){
             //console.log(key);
         }
     }
-    //for (var loesche in produkte){
-        //localStorage.removeItem(produkte[loesche]);
-    //}
+    for (var loesche in produkte){
+        localStorage.removeItem(produkte[loesche]);
+    }
     
     var bestellid = localStorage.getItem("bestellung");
     var counter = 0;
@@ -87,7 +87,7 @@ $(document).ready(function(){
             zahldiv.append(zahlungsart);
             $("#zahlung").append(zahldiv);
 
-    //localStorage.removeItem("bestellung");
+    localStorage.removeItem("bestellung");
     }).fail(function(response){
         console.log("Das hat nicht funktioniert!!!");
     });    
