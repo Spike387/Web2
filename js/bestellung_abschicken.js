@@ -52,12 +52,14 @@ $(document).ready(function(){
     $('#anhang_warenkorb').append(ul);
     $("#kaufen_abschicken").click(function(event){
         event.preventDefault();
-        var varichecked = document.getElementById("frau");
+        if(document.getElementById("vorname_auswahl").value == "" || document.getElementById("nachname_auswahl").value == "" || document.getElementById("strasse_auswahl").value == "" || document.getElementById("hausnummer_auswahl").value == "" || document.getElementById("stadt_auswahl").value == "" || document.getElementById("plz_auswahl").value == ""){
+            alert("Sie müssen alle Felder ausfüllen!");
+        }else{
+            var varichecked = document.getElementById("frau");
         var anrede = "herr";
         if (varichecked.checked){
             anrede = "frau";
         }
-        event.preventDefault();
         var adresse_id;
         var adresse = {"strasse": document.getElementById("strasse_auswahl").value,"hausnummer": document.getElementById("hausnummer_auswahl").value, "plz": document.getElementById("plz_auswahl").value, "ort": document.getElementById("stadt_auswahl").value, "adresszusatz": document.getElementById("adresse2_auswahl").value,"land":{"id":44,"kennzeichnung":"DE","bezeichnung":"Deutschland"}}
         
@@ -116,16 +118,17 @@ $(document).ready(function(){
             }).fail(function(jqXHR, statusText, error){
                 console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
             });
-        }).fail(function(jqXHR, statusText, error){
-            console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
-        });
-        
-    }).fail(function(jqXHR, statusText, error){
-        console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
-    });
+            }).fail(function(jqXHR, statusText, error){
+                console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
+            });
+            
+            }).fail(function(jqXHR, statusText, error){
+                console.log("Response Code: " + jqXHR.status + " - Fehlermeldung: " + jqXHR.responseText + error);
+            });
+        }
     
     })
-    
+
 })
 
 function mailSenden(vorname,nachname,email){
